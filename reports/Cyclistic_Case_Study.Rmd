@@ -1,0 +1,105 @@
+
+---
+title: "Cyclistic Bike-Share Case Study"
+author: "Bahaa Elkady"
+date: "`r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+---
+
+# Introduction
+
+This case study investigates how casual riders and annual members use Cyclistic bikes differently. Through a comprehensive data analysis process, the project aimed to deliver actionable insights to help convert casual riders into annual members.
+
+# Business Task
+
+The goal of the project was to analyze historical bike trip data to identify trends in bike usage between annual members and casual riders. This analysis provided recommendations for Cyclistic's marketing team to tailor strategies that target casual riders.
+
+# Data Sources
+
+The data used in this project includes:
+- Divvy Trips 2019 Q1
+- Divvy Trips 2020 Q1
+
+# Data Cleaning and Processing
+
+The datasets were cleaned and processed to ensure consistency. Key steps involved:
+- Renaming columns for uniformity across datasets
+- Converting date columns to proper formats
+- Calculating trip duration for each ride
+
+# Analysis and Findings
+
+The analysis revealed differences in bike usage patterns between casual riders and annual members. For example:
+- **Casual riders** tended to take longer trips on average.
+- **Annual members** were more likely to use bikes during weekdays for commuting.
+- Popular stations varied between the two groups.
+
+## Key Findings
+1. Casual riders tend to take longer trips, especially on weekends.
+2. Annual members use bikes more frequently for shorter trips, indicating a focus on commuting.
+3. The most popular stations for both groups differ, suggesting targeted marketing efforts could be applied based on station popularity.
+
+# Visualizations
+
+## Average Trip Duration by User Type
+
+```{r, echo=FALSE, message=FALSE}
+# Plot average trip duration by user type
+ggplot(summary_stats, aes(x = member_casual, y = average_duration, fill = member_casual)) +
+  geom_bar(stat = "identity", color = "black", size = 0.5) +
+  labs(
+    title = "Average Trip Duration by User Type",
+    subtitle = "Comparison of Average Trip Duration Between Casual Riders and Annual Members",
+    x = "User Type",
+    y = "Average Duration (Minutes)"
+  ) +
+  scale_fill_manual(values = c("casual" = "#FF9999", "member" = "#66B3FF")) +
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(size = 22, face = "bold"),
+    plot.subtitle = element_text(size = 16),
+    axis.title = element_text(size = 16),
+    axis.text = element_text(size = 14),
+    legend.title = element_blank(),
+    legend.text = element_text(size = 14)
+  )
+```
+
+## Popularity of Start Stations by User Type
+
+```{r, echo=FALSE, message=FALSE}
+# Plot popularity of start stations by user type
+ggplot(popular_stations, aes(x = reorder(start_station_name, trip_count), y = trip_count, fill = member_casual)) +
+  geom_bar(stat = "identity", color = "black", size = 0.5) +
+  coord_flip() +
+  labs(
+    title = "Most Popular Start Stations by User Type",
+    x = "Start Station",
+    y = "Number of Trips"
+  ) +
+  scale_fill_manual(values = c("casual" = "#FF9999", "member" = "#66B3FF")) +
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(size = 22, face = "bold"),
+    axis.title = element_text(size = 16),
+    axis.text = element_text(size = 12, angle = 45, hjust = 1),
+    legend.title = element_blank(),
+    legend.text = element_text(size = 14)
+  )
+```
+
+# Recommendations
+
+Based on the analysis, here are the top three recommendations:
+1. **Targeted weekend campaigns**: Since casual riders tend to take longer trips on weekends, Cyclistic could offer weekend promotions to encourage them to subscribe.
+2. **Membership drive for commuters**: Annual members are mostly commuters, so Cyclistic could promote annual memberships by targeting commuters with incentives.
+3. **Optimize bike availability on weekends**: Cyclistic should ensure that enough bikes are available in popular start stations for casual riders on weekends to avoid shortages.
+
+# Conclusion
+
+The analysis provided insights into how casual riders and annual members use Cyclistic bikes differently. These findings can guide marketing strategies to convert casual riders into loyal annual members.
+
