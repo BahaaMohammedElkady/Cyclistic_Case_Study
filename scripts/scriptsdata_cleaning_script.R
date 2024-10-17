@@ -3,8 +3,8 @@
 library(dplyr)
 
 # Load the datasets
-divvy_2019 <- read.csv('path/to/Divvy_Trips_2019_Q1.csv')
-divvy_2020 <- read.csv('path/to/Divvy_Trips_2020_Q1.csv')
+divvy_2019 <- read.csv('D:/Pharmacy_Projects/Cyclistic_Case_Study/data_raw/Divvy_Trips_2019_Q1.xlsx')
+divvy_2020 <- read.csv('D:/Pharmacy_Projects/Cyclistic_Case_Study/data_raw/Divvy_Trips_2020_Q1.xlsx')
 
 # Clean and transform datasets as needed
 divvy_2019 <- divvy_2019 %>%
